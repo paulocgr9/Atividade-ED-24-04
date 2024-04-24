@@ -21,6 +21,7 @@ void insertAfter(Node*, int);
 void deleteNode(Node**, Node*);
 void displayList(Node*);
 void insertBefore(Node**, Node*, int);
+Node* searchNodebyValue(Node**, int);
 
 // Driver Code
 int main()
@@ -46,6 +47,10 @@ int main()
 	insertBefore(&head, head->ptrNext->ptrNext->ptrNext, 99);
 	insertBefore(&head, head, 333);
 	displayList(head);
+	deleteNode(&head, head);
+	displayList(head);
+	Node* node = searchNodebyValue(&head, 10);
+	cout << node->iPayload << endl;
 
     return 0;
 }
@@ -195,4 +200,23 @@ void insertBefore(Node** head, Node* ptrLocation, int iPayLoad)
 		(*head) = newNode;
 	}
 
+}
+
+Node* searchNodebyValue(Node** head, int iValue)
+{
+	if (head == nullptr)
+	{
+		cout << "A lista passada está vazia." << endl;
+	}
+	
+	Node* ptrCurrent = *head;
+	while (ptrCurrent->ptrNext != nullptr)
+	{
+		if (ptrCurrent->iPayload == iValue) return ptrCurrent;
+		ptrCurrent = ptrCurrent->ptrNext;
+	}
+	
+	cout << "O valor não foi encontrado" << endl;
+	
+	return ptrCurrent;
 }

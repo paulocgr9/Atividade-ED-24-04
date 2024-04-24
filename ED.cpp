@@ -17,7 +17,7 @@ typedef struct Node
 Node* createNode(int);
 void insertFront(Node**, int);
 void insertEnd(Node**, int);
-void insertAfter(Node**, int);
+void insertAfter(Node*, int);
 void deleteNode(Node**, Node*);
 void displayList(Node*);
 void insertBefore(Node**, Node*, int);
@@ -37,6 +37,11 @@ int main()
     insertEnd(&head, 10);
     insertEnd(&head, 13);
     displayList(head);
+    cout << "====================================" << endl;
+	insertAfter(head->ptrNext->ptrNext->ptrNext, 911);
+	displayList(head);
+    deleteNode(&head, head->ptrNext->ptrNext->ptrNext->ptrNext);
+	displayList(head);
     cout << "====================================" << endl;
 	insertBefore(&head, head->ptrNext->ptrNext->ptrNext, 99);
 	insertBefore(&head, head, 333);
@@ -151,12 +156,12 @@ void deleteNode(Node** head, Node* ptrDelete)
 	
 	// Caso o ptrDelete seja o primeiro elemento da lista
 	if (*head == ptrDelete) (*head) = ptrDelete->ptrNext;
-	
+
 	// Se o ptrDelete não é o último nó
 	if (ptrDelete->ptrNext != nullptr) ptrDelete->ptrNext->ptrPrev = ptrDelete->ptrPrev;
 
 	// Se o ptrDelete não é o primeiro nó
-	if (ptrDelete->ptrPrev == nullptr) ptrDelete->ptrPrev->ptrNext = ptrDelete->ptrNext;
+	if (ptrDelete->ptrPrev != nullptr) ptrDelete->ptrPrev->ptrNext = ptrDelete->ptrNext;
 	
 	free(ptrDelete);
 }

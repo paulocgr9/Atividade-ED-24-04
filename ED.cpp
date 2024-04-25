@@ -230,6 +230,7 @@ Node* searchNodebyValue(Node** head, int iValue)
 	if (head == nullptr)
 	{
 		cout << "A lista passada está vazia." << endl;
+		return nullptr;
 	}
 	
 	// Percorrer a lista duplamente encadeada até encontrar o valor desejado
@@ -241,13 +242,16 @@ Node* searchNodebyValue(Node** head, int iValue)
 	}
 	
 	// Caso o valor não seja encontrado
-	if (ptrCurrent == nullptr) cout << "O valor não foi encontrado" << endl;
-
-	return nullptr;
+	if (ptrCurrent == nullptr) 
+	{
+		cout << "O valor não foi encontrado" << endl;
+		return nullptr;
+	}
 }
 
 void deleteNodebyValue(Node** head, int iValue)
 {
+	// Tratamento de casos especiais já são feitos na definição das funções usadas.
 	// Procura um nó com o dado valor
 	Node* node = searchNodebyValue(head, iValue);
 

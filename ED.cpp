@@ -213,6 +213,7 @@ void insertBefore(Node** head, Node* ptrLocation, int iPayLoad)
 	// Corrigir o ponto de inserção
 	ptrLocation->ptrPrev = newNode;
 
+	// Conecta ao anterior e caso seja o primeiro torna-o o head
 	if (newNode->ptrPrev != nullptr)
 	{
 		newNode->ptrPrev->ptrNext = newNode;
@@ -231,6 +232,7 @@ Node* searchNodebyValue(Node** head, int iValue)
 		cout << "A lista passada está vazia." << endl;
 	}
 	
+	// Percorrer a lista duplamente encadeada até encontrar o valor desejado
 	Node* ptrCurrent = *head;
 	while (ptrCurrent != nullptr)
 	{
@@ -238,15 +240,18 @@ Node* searchNodebyValue(Node** head, int iValue)
 		ptrCurrent = ptrCurrent->ptrNext;
 	}
 	
+	// Caso o valor não seja encontrado
 	if (ptrCurrent == nullptr) cout << "O valor não foi encontrado" << endl;
 
-	return ptrCurrent;
+	return nullptr;
 }
 
 void deleteNodebyValue(Node** head, int iValue)
 {
+	// Procura um nó com o dado valor
 	Node* node = searchNodebyValue(head, iValue);
 
+	// Deleta o nó encontrado
 	deleteNode(head, node);
 
 	return;

@@ -22,6 +22,7 @@ void deleteNode(Node**, Node*);
 void displayList(Node*);
 void insertBefore(Node**, Node*, int);
 Node* searchNodebyValue(Node**, int);
+void deleteNodebyValue(Node**, int);
 
 // Driver Code
 int main()
@@ -49,8 +50,29 @@ int main()
 	displayList(head);
 	deleteNode(&head, head);
 	displayList(head);
-	Node* node = searchNodebyValue(&head, 10);
-	cout << node->iPayload << endl;
+    cout << "====================================" << endl;
+
+	Node* node1 = searchNodebyValue(&head, 0);
+	Node* node2 = searchNodebyValue(&head, 10);
+	Node* node3 = searchNodebyValue(&head, 13);
+	Node* node4 = searchNodebyValue(&head, 14);
+	cout << node1->iPayload << endl;
+	cout << node2->iPayload << endl;
+	cout << node3->iPayload << endl;
+    cout << "====================================" << endl;
+
+	displayList(head);
+
+	deleteNodebyValue(&head, 0);
+	displayList(head);
+
+	deleteNodebyValue(&head, 10);
+	displayList(head);
+	deleteNodebyValue(&head, 13);
+	displayList(head);
+
+	deleteNodebyValue(&head, 14);
+	displayList(head);
 
     return 0;
 }
@@ -210,13 +232,22 @@ Node* searchNodebyValue(Node** head, int iValue)
 	}
 	
 	Node* ptrCurrent = *head;
-	while (ptrCurrent->ptrNext != nullptr)
+	while (ptrCurrent != nullptr)
 	{
 		if (ptrCurrent->iPayload == iValue) return ptrCurrent;
 		ptrCurrent = ptrCurrent->ptrNext;
 	}
 	
-	cout << "O valor não foi encontrado" << endl;
-	
+	if (ptrCurrent == nullptr) cout << "O valor não foi encontrado" << endl;
+
 	return ptrCurrent;
+}
+
+void deleteNodebyValue(Node** head, int iValue)
+{
+	Node* node = searchNodebyValue(head, iValue);
+
+	deleteNode(head, node);
+
+	return;
 }
